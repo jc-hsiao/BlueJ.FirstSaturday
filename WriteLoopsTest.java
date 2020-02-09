@@ -71,6 +71,7 @@ public class WriteLoopsTest
     public void Test2to32()
     {
         WriteLoops writeLoo1 = new WriteLoops();
+        //the returning result can't be zero
         assertEquals(0, writeLoo1.byTwoTo32());
     }
 
@@ -108,13 +109,25 @@ public class WriteLoopsTest
     public void TestCheckGameScore()
     {
         WriteLoops writeLoo1 = new WriteLoops();
+        
+        //w can return either 4 or 3 or 2 
+        //the loop is basically adding a random number to runningScore until it's over 236
+        //while the random number is between (20+31) and (99+31)
+        //which is 51-130, assume a user is always lucky they can always get max number 130
+        //then the loop will only run 2 times with runningScore become 130 in the first loop
+        //and then runningScore become 130+260 in the second loop 
+        //which is bigger than 236 then the loop exits.
         assertEquals(3, writeLoo1.checkGameScore());
+        
     }
 
     @Test
     public void TestCheckGameScoreDoWhile()
     {
         WriteLoops writeLoo1 = new WriteLoops();
+        
+        //this test should check for false for the reason above,
+        //since it's possible for the loop to run only two times
         assertEquals(true, writeLoo1.checkGameScoreDoWhile());
     }
 
@@ -124,6 +137,24 @@ public class WriteLoopsTest
         WriteLoops writeLoo1 = new WriteLoops();
         assertEquals(3, writeLoo1.checkServerStatus());
     }
+    
+    @Test
+    public void testFoo()
+    {
+        WriteLoops writeLoo1 = new WriteLoops();
+        //assertEquals(7, writeLoo1.foo());
+        assertEquals(7, writeLoo1.rewriteFooAsFor());        
+        assertEquals(7, writeLoo1.rewriteFooAsWhile());
+    }
+    
+    @Test
+    public void testVote()
+    {
+        WriteLoops writeLoo1 = new WriteLoops();
+        //assertEquals(7, writeLoo1.foo());
+        assertEquals(13, writeLoo1.tallyVote1());        
+        assertEquals(13, writeLoo1.tallyVote2());
+    }        
 }
 
 
